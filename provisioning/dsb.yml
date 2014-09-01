@@ -31,6 +31,7 @@
         - python-scikits-learn # scipy stack
         - python-matplotlib # scipy stack
         - ipython # scipy stack
+        - ipython-qtconsole # scipy stack
         - ipython-notebook # scipy stack
         - python-pandas # scipy stack
         - python-sympy # scipy stack
