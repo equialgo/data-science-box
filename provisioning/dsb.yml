@@ -49,6 +49,7 @@
         - curl
         - g++
         - python-software-properties 
+        - python-setuptools
         - p7zip-full
         - unrar-free
         - unzip
