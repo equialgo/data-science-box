@@ -3,6 +3,11 @@
   sudo: yes
   vars:
     parallel_version: 20140622
+    ipynb_server:
+      ip: '"*"''
+      port: 8888
+
+  remote_user: vagrant
   tasks:
     - name: Make sure that the repos directory exists
       file: path=/home/vagrant/repos state=directory owner=vagrant group=vagrant
@@ -31,6 +36,7 @@
         - python-scikits-learn # scipy stack
         - python-matplotlib # scipy stack
         - ipython # scipy stack
+        - install ipython-qtconsole # scipy stack
         - ipython-notebook # scipy stack
         - python-pandas # scipy stack
         - python-sympy # scipy stack
@@ -56,7 +62,6 @@
         - openjdk-6-jdk
         - leiningen
         - cowsay
-        - screen
 
     - name: Get Data Science at the Command Line tools, data, and scripts
       git: repo=https://github.com/jeroenjanssens/data-science-at-the-command-line.git dest=/home/vagrant/.data-science-at-the-command-line 
@@ -205,12 +210,13 @@
       file: path=/vagrant/workspace state=directory owner=vagrant group=vagrant
     - name: Linking workspace  
       shell: ln -s /vagrant/workspace /home/vagrant/workspace
-      
+
     - name: creating dsb ipython profile
       shell: /usr/bin/ipython profile create dsb
       sudo: no
     - name: updating ipython configuration
       template: src=templates/ipython_notebook_config.py.j2 dest=/home/vagrant/.ipython/profile_dsb/ipython_notebook_config.py owner=vagrant group=vagrant mode=0644 backup=true
+
 
     #- name: Download Q
       #get_url: url=https://raw.github.com/harelba/q/1.3.0/q dest=/home/vagrant/tools/q mode=0755 owner=vagrant group=vagrant
