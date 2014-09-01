@@ -130,7 +130,7 @@
     #  shell: chdir=/home/vagrant/repos/drake  /usr/bin/lein uberjar
     #  sudo: no
     - name: Move Drake
-      shell: mv /home/provisioning/drake/drake.jar /home/vagrant/.bin/
+      shell: mv /vagrant/provisioning/drake/drake.jar /home/vagrant/.bin/
     
     - name: Get Drip
       git: repo=https://github.com/flatland/drip.git dest=/home/vagrant/.drip-repo
@@ -173,7 +173,7 @@
       shell: rm -rf /home/vagrant/repos
 
     - name: Create symlink for dotfiles
-      shell: ln -sf /home/vagrant/provisioning/dotfiles/{{ item }} /home/vagrant/.{{ item }}
+      shell: ln -sf /vagrant/provisioning/dotfiles/{{ item }} /home/vagrant/.{{ item }}
       with_items:
         - bash_aliases
         - bash_completion
@@ -181,7 +181,7 @@
         - profile
 
     - name: Create symlink for MOTD
-      shell: ln -sf /home/vagrant/provisioning/motd/{{ item }} /etc/update-motd.d/{{ item }}
+      shell: ln -sf /vagrant/provisioning/motd/{{ item }} /etc/update-motd.d/{{ item }}
       with_items:
         - 00-header
         - 10-help-text
