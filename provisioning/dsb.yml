@@ -106,7 +106,7 @@
         - logutils
         - ggplot
         - seaborn
-        - dst
+        - paramiko
 
     - name: Download GNU Parallel
       get_url: url=http://ftp.gnu.org/gnu/parallel/parallel-{{ parallel_version }}.tar.bz2 dest=/home/vagrant/parallel-{{ parallel_version }}.tar.bz2
