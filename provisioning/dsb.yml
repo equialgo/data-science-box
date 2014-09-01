@@ -204,6 +204,12 @@
       file: path=/vagrant/workspace state=directory owner=vagrant group=vagrant
     - name: Linking workspace  
       shell: ln -s /vagrant/workspace /home/vagrant/workspace
+      
+    - name: creating dsb ipython profile
+      shell: /usr/bin/ipython profile create dsb
+      sudo: no
+    - name: updating ipython configuration
+      template: src=templates/ipython_notebook_config.py.j2 dest=/home/vagrant/.ipython/profile_dsb/ipython_notebook_config.py owner=vagrant group=vagrant mode=0644 backup=true
 
     #- name: Download Q
       #get_url: url=https://raw.github.com/harelba/q/1.3.0/q dest=/home/vagrant/tools/q mode=0755 owner=vagrant group=vagrant
