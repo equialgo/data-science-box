@@ -3,6 +3,11 @@
   sudo: yes
   vars:
     parallel_version: 20140622
+    ipynb_server:
+      ip: '"*"'
+      port: 8888
+
+  remote_user: vagrant
   tasks:
     - name: Make sure that the repos directory exists
       file: path=/home/vagrant/repos state=directory owner=vagrant group=vagrant
@@ -31,6 +36,7 @@
         - python-scikits-learn # scipy stack
         - python-matplotlib # scipy stack
         - ipython # scipy stack
+        - install ipython-qtconsole # scipy stack
         - ipython-notebook # scipy stack
         - python-pandas # scipy stack
         - python-sympy # scipy stack
@@ -106,6 +112,7 @@
         - logutils
         - ggplot
         - seaborn
+        - paramiko
 
     - name: Download GNU Parallel
       get_url: url=http://ftp.gnu.org/gnu/parallel/parallel-{{ parallel_version }}.tar.bz2 dest=/home/vagrant/parallel-{{ parallel_version }}.tar.bz2
@@ -123,14 +130,15 @@
     - name: Install SKLL
       pip: name=skll state=latest extra_args=--no-deps
 
-    - name: Get Drake
-      git: repo=https://github.com/Factual/drake.git dest=/home/vagrant/repos/drake/
-      sudo: no # lein does not work with sudo
-    - name: Compile Drake
-      shell: chdir=/home/vagrant/repos/drake  /usr/bin/lein uberjar
-      sudo: no
+    #- name: Get Drake
+    #  git: repo=https://github.com/Factual/drake.git dest=/home/vagrant/repos/drake/
+    #  sudo: no # lein does not work with sudo
+    #- name: Compile Drake
+    #  shell: chdir=/home/vagrant/repos/drake  /usr/bin/lein uberjar
+    #  sudo: no
     - name: Move Drake
-      shell: mv /home/vagrant/repos/drake/drake.jar /home/vagrant/.bin/
+      shell: mv /vagrant/provisioning/drake/drake.jar /home/vagrant/.bin/
+    
     - name: Get Drip
       git: repo=https://github.com/flatland/drip.git dest=/home/vagrant/.drip-repo
     - name: Install Drip
@@ -168,11 +176,18 @@
     - name: Install csvquote
       shell: chdir=/home/vagrant/repos/csvquote make; make install
 
+    - name: Get mysql-connector-python
+      get_url: url=http://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.2.3.zip dest=/home/vagrant/repos/mysql-connector-python-1.2.3.zip
+    - name: Unzip mysql-connector-python
+      shell: chdir=/home/vagrant/repos unzip mysql-connector-python-1.2.3.zip
+    - name: Install mysql-connector-python
+      shell: chdir=/home/vagrant/repos/mysql-connector-python-1.2.3 python setup.py install
+
     - name: Delete repos directory
       shell: rm -rf /home/vagrant/repos
 
     - name: Create symlink for dotfiles
-      shell: ln -sf /home/vagrant/.data-science-at-the-command-line/dst/build/bundle/dotfiles/{{ item }} /home/vagrant/.{{ item }}
+      shell: ln -sf /vagrant/provisioning/dotfiles/{{ item }} /home/vagrant/.{{ item }}
       with_items:
         - bash_aliases
         - bash_completion
@@ -180,7 +195,7 @@
         - profile
 
     - name: Create symlink for MOTD
-      shell: ln -sf /home/vagrant/.data-science-at-the-command-line/dst/build/bundle/motd/{{ item }} /etc/update-motd.d/{{ item }}
+      shell: ln -sf /vagrant/provisioning/motd/{{ item }} /etc/update-motd.d/{{ item }}
       with_items:
         - 00-header
         - 10-help-text
@@ -190,6 +205,18 @@
 
     - name: Change owner
       file: path=/home/vagrant state=directory owner=vagrant group=vagrant recurse=yes
+
+    - name: Create workspace
+      file: path=/vagrant/workspace state=directory owner=vagrant group=vagrant
+    - name: Linking workspace  
+      shell: ln -s /vagrant/workspace /home/vagrant/workspace
+
+    - name: creating dsb ipython profile
+      shell: /usr/bin/ipython profile create dsb
+      sudo: no
+    - name: updating ipython configuration
+      template: src=templates/ipython_notebook_config.py.j2 dest=/home/vagrant/.ipython/profile_dsb/ipython_notebook_config.py owner=vagrant group=vagrant mode=0644 backup=true
+
 
     #- name: Download Q
       #get_url: url=https://raw.github.com/harelba/q/1.3.0/q dest=/home/vagrant/tools/q mode=0755 owner=vagrant group=vagrant

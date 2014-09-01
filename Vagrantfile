@@ -3,11 +3,11 @@
 
 Vagrant.configure("2") do |config|
   config.vm.box = "puppetlabs/ubuntu-14.04-64-nocm"
-
+  config.vm.box_check_update = true
   config.vm.network "forwarded_port", guest: 8888, host: 8889
 
   config.vm.provision "ansible" do |ansible|
-    ansible.verbose = "-vvvv"
+    ansible.verbose = "-v"
     ansible.playbook = "provisioning/dsb.yml"
   end
 
