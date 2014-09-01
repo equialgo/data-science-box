@@ -4,7 +4,7 @@
   vars:
     parallel_version: 20140622
     ipynb_server:
-      ip: '"*"''
+      ip: '"*"'
       port: 8888
 
   remote_user: vagrant
