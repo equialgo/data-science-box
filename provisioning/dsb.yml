@@ -123,14 +123,15 @@
     - name: Install SKLL
       pip: name=skll state=latest extra_args=--no-deps
 
-    - name: Get Drake
-      git: repo=https://github.com/Factual/drake.git dest=/home/vagrant/repos/drake/
-      sudo: no # lein does not work with sudo
-    - name: Compile Drake
-      shell: chdir=/home/vagrant/repos/drake  /usr/bin/lein uberjar
-      sudo: no
+    #- name: Get Drake
+    #  git: repo=https://github.com/Factual/drake.git dest=/home/vagrant/repos/drake/
+    #  sudo: no # lein does not work with sudo
+    #- name: Compile Drake
+    #  shell: chdir=/home/vagrant/repos/drake  /usr/bin/lein uberjar
+    #  sudo: no
     - name: Move Drake
-      shell: mv /home/vagrant/repos/drake/drake.jar /home/vagrant/.bin/
+      shell: mv /home/provisioning/drake/drake.jar /home/vagrant/.bin/
+    
     - name: Get Drip
       git: repo=https://github.com/flatland/drip.git dest=/home/vagrant/.drip-repo
     - name: Install Drip
@@ -172,7 +173,7 @@
       shell: rm -rf /home/vagrant/repos
 
     - name: Create symlink for dotfiles
-      shell: ln -sf /home/vagrant/.data-science-at-the-command-line/dst/build/bundle/dotfiles/{{ item }} /home/vagrant/.{{ item }}
+      shell: ln -sf /home/vagrant/provisioning/dotfiles/{{ item }} /home/vagrant/.{{ item }}
       with_items:
         - bash_aliases
         - bash_completion
@@ -180,7 +181,7 @@
         - profile
 
     - name: Create symlink for MOTD
-      shell: ln -sf /home/vagrant/.data-science-at-the-command-line/dst/build/bundle/motd/{{ item }} /etc/update-motd.d/{{ item }}
+      shell: ln -sf /home/vagrant/provisioning/motd/{{ item }} /etc/update-motd.d/{{ item }}
       with_items:
         - 00-header
         - 10-help-text
