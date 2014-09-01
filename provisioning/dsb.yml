@@ -4,7 +4,6 @@
   vars:
     parallel_version: 20140622
   tasks:
-
     - name: Make sure that the repos directory exists
       file: path=/home/vagrant/repos state=directory owner=vagrant group=vagrant
     - name: Make sure that the .bin directory exists
@@ -125,8 +124,10 @@
 
     - name: Get Drake
       git: repo=https://github.com/Factual/drake.git dest=/home/vagrant/repos/drake/
+      sudo: no # lein does not work with sudo
     - name: Compile Drake
-      shell: chdir=/home/vagrant/repos/drake /usr/bin/lein uberjar
+      shell: chdir=/home/vagrant/repos/drake  /usr/bin/lein uberjar
+      sudo: no
     - name: Move Drake
       shell: mv /home/vagrant/repos/drake/drake.jar /home/vagrant/.bin/
     - name: Get Drip
