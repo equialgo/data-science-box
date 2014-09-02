@@ -4,7 +4,7 @@
   vars:
     parallel_version: 20140622
     ipynb_server:
-      ip: '"*"'
+      ip: "'localhost'"
       port: 8888
   tasks:
     - name: Make sure that the repos directory exists
@@ -75,6 +75,15 @@
         - sqldf
         - dplyr
 
+    - shell: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3D3D3ACC
+    - apt_repository: repo='deb http://ppa.launchpad.net/staticfloat/juliareleases/ubuntu trusty main' state=present
+    - apt: pkg=julia state=latest update_cache=yes
+    - name: Installing Julia packages (as non-root user)
+      shell: sudo julia -e 'Pkg.add("{{item}}")'
+      sudo: no
+      with_items:
+        - IJulia
+
     - name: Install jq
       get_url: url=http://stedolan.github.io/jq/download/linux64/jq dest=/home/vagrant/.bin/jq mode=0755 owner=vagrant group=vagrant
 
@@ -110,6 +119,8 @@
         - ggplot
         - seaborn
         - paramiko
+        - ipython
+        - rpy2
 
     - name: Download GNU Parallel
       get_url: url=http://ftp.gnu.org/gnu/parallel/parallel-{{ parallel_version }}.tar.bz2 dest=/home/vagrant/parallel-{{ parallel_version }}.tar.bz2
@@ -151,7 +162,7 @@
       shell: mv /tmp/csvfix/csvfix/bin/csvfix /home/vagrant/.bin/
 
     - name: Get Weka
-      get_url: url=http://downloads.sourceforge.net/project/weka/weka-3-7/3.7.11/weka-3-7-11.zip dest=/home/vagrant/repos/weka.zip
+      shell: wget -O /home/vagrant/repos/weka.zip http://downloads.sourceforge.net/project/weka/weka-3-7/3.7.11/weka-3-7-11.zip
     - name: Install Weka
       shell: |
         unzip weka.zip
@@ -174,11 +185,11 @@
       shell: chdir=/home/vagrant/repos/csvquote make; make install
 
     - name: Get mysql-connector-python
-      get_url: url=http://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.2.3.zip dest=/home/vagrant/repos/mysql-connector-python-1.2.3.zip
+      get_url: url=http://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.2.3.zip dest=/home/vagrant/repos/mysql-connector-python.zip
     - name: Unzip mysql-connector-python
-      shell: chdir=/home/vagrant/repos unzip mysql-connector-python-1.2.3.zip
+      shell: chdir=/home/vagrant/repos unzip mysql-connector-python.zip
     - name: Install mysql-connector-python
-      shell: chdir=/home/vagrant/repos/mysql-connector-python-1.2.3 python setup.py install
+      shell: chdir=/home/vagrant/repos/mysql-connector-python python setup.py install
 
     - name: Delete repos directory
       shell: rm -rf /home/vagrant/repos
@@ -213,6 +224,7 @@
       sudo: no
     - name: updating ipython configuration
       template: src=templates/ipython_notebook_config.py.j2 dest=/home/vagrant/.ipython/profile_dsb/ipython_notebook_config.py owner=vagrant group=vagrant mode=0644 backup=true
+
 
 
     #- name: Download Q
