@@ -11,6 +11,6 @@ Installion requires:
 * [Ansible](http://www.ansible.com/home)
 
 # Installation
-1. Checkout the git repo
-2. vagrant up
+1. checkout the git repo
+2. run "vagrant up"
 3. and you are done! 
