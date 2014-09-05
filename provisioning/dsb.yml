@@ -114,6 +114,7 @@
         - pandas
         - sympy
         - nose
+        - patsy
         - statsmodels
         - ggplot
         - seaborn
