@@ -140,7 +140,7 @@
       pip: name=skll state=latest extra_args=--no-deps
 
     - name: Move Drake
-      shell: mv /vagrant/provisioning/drake/drake.jar /home/vagrant/.bin/
+      shell: cp /vagrant/provisioning/drake/drake.jar /home/vagrant/.bin/
     
     - name: Get Drip
       git: repo=https://github.com/flatland/drip.git dest=/home/vagrant/.drip-repo
