@@ -29,16 +29,6 @@
         - libxslt1-dev # lxml
         - zlib1g-dev # lxml
         - libfreetype6-dev # for matplotlib
-        - python-numpy # scipy stack
-        - python-scipy # scipy stack
-        - python-scikits-learn # scipy stack
-        - python-matplotlib # scipy stack
-        - ipython # scipy stack
-        - ipython-notebook # scipy stack
-        - python-pandas # scipy stack
-        - python-sympy # scipy stack
-        - python-nose # scipy stack
-        - python-statsmodels # scipy stack
         - tree
         - imagemagick # display
         - feedgnuplot
@@ -116,11 +106,21 @@
         - configparser
         - futures
         - logutils
+        - numpy
+        - scipy
+        - scikit-learn
+        - matplotlib
+        - ipython
+        - pandas
+        - sympy
+        - nose
+        - statsmodels
         - ggplot
         - seaborn
         - paramiko
         - ipython
         - rpy2
+        - bokeh
 
     - name: Download GNU Parallel
       get_url: url=http://ftp.gnu.org/gnu/parallel/parallel-{{ parallel_version }}.tar.bz2 dest=/home/vagrant/parallel-{{ parallel_version }}.tar.bz2
@@ -138,12 +138,6 @@
     - name: Install SKLL
       pip: name=skll state=latest extra_args=--no-deps
 
-    #- name: Get Drake
-    #  git: repo=https://github.com/Factual/drake.git dest=/home/vagrant/repos/drake/
-    #  sudo: no # lein does not work with sudo
-    #- name: Compile Drake
-    #  shell: chdir=/home/vagrant/repos/drake  /usr/bin/lein uberjar
-    #  sudo: no
     - name: Move Drake
       shell: mv /vagrant/provisioning/drake/drake.jar /home/vagrant/.bin/
     
