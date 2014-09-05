@@ -184,7 +184,7 @@
     - name: Unzip mysql-connector-python
       shell: chdir=/home/vagrant/repos unzip mysql-connector-python.zip
     - name: Install mysql-connector-python
-      shell: chdir=/home/vagrant/repos/mysql-connector-python python setup.py install
+      shell: chdir=/home/vagrant/repos/mysql-connector-python-1.2.3 python setup.py install
 
     - name: Delete repos directory
       shell: rm -rf /home/vagrant/repos
@@ -215,7 +215,7 @@
       shell: ln -s /vagrant/workspace /home/vagrant/workspace
 
     - name: creating dsb ipython profile
-      shell: /usr/bin/ipython profile create dsb
+      shell: /usr/local/bin/ipython profile create dsb
       sudo: no
     - name: updating ipython configuration
       template: src=templates/ipython_notebook_config.py.j2 dest=/home/vagrant/.ipython/profile_dsb/ipython_notebook_config.py owner=vagrant group=vagrant mode=0644 backup=true
