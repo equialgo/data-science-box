@@ -110,7 +110,7 @@
         - scipy
         - scikit-learn
         - matplotlib
-        - ipython
+        - ipython[notebook]
         - pandas
         - sympy
         - nose
@@ -119,7 +119,6 @@
         - ggplot
         - seaborn
         - paramiko
-        - ipython
         - rpy2
         - bokeh
 
