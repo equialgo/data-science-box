@@ -4,8 +4,11 @@
   vars:
     parallel_version: 20140622
     ipynb_server:
-      ip: "'localhost'"
+      ip: "'*'"
       port: 8888
+    ijynb_server:
+      ip: "'*'"
+      port: 8998
   tasks:
     - name: Make sure that the repos directory exists
       file: path=/home/vagrant/repos state=directory owner=vagrant group=vagrant
@@ -65,15 +68,6 @@
         - sqldf
         - dplyr
 
-    - shell: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3D3D3ACC
-    - apt_repository: repo='deb http://ppa.launchpad.net/staticfloat/juliareleases/ubuntu trusty main' state=present
-    - apt: pkg=julia state=latest update_cache=yes
-    - name: Installing Julia packages (as non-root user)
-      shell: sudo julia -e 'Pkg.add("{{item}}")'
-      sudo: no
-      with_items:
-        - IJulia
-
     - name: Install jq
       get_url: url=http://stedolan.github.io/jq/download/linux64/jq dest=/home/vagrant/.bin/jq mode=0755 owner=vagrant group=vagrant
 
@@ -121,6 +115,21 @@
         - paramiko
         - rpy2
         - bokeh
+
+
+    - shell: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3D3D3ACC
+    - apt_repository: repo='deb http://ppa.launchpad.net/staticfloat/juliareleases/ubuntu trusty main' state=present
+    - apt: pkg=julia state=latest update_cache=yes
+    - name: Updating Julia packages (as non-root user)
+      shell: sudo julia -e 'Pkg.update()'
+      sudo: no
+    - name: Installing Julia packages (as non-root user)
+      shell: sudo julia -e 'Pkg.add("{{item}}")'
+      sudo: no
+      with_items:
+        - IJulia
+    - name: updating ipython configuration
+      template: src=templates/ijulia_notebook_config.py.j2 dest=/home/vagrant/.ipython/profile_julia/ipython_notebook_config.py owner=vagrant group=vagrant mode=0644 backup=true
 
     - name: Download GNU Parallel
       get_url: url=http://ftp.gnu.org/gnu/parallel/parallel-{{ parallel_version }}.tar.bz2 dest=/home/vagrant/parallel-{{ parallel_version }}.tar.bz2
@@ -218,6 +227,7 @@
       sudo: no
     - name: updating ipython configuration
       template: src=templates/ipython_notebook_config.py.j2 dest=/home/vagrant/.ipython/profile_dsb/ipython_notebook_config.py owner=vagrant group=vagrant mode=0644 backup=true
+
 
 
 
