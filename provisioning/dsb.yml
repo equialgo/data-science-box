@@ -217,10 +217,10 @@
     - name: Change owner
       file: path=/home/vagrant state=directory owner=vagrant group=vagrant recurse=yes
 
-    - name: Create workspace
-      file: path=/vagrant/workspace state=directory owner=vagrant group=vagrant
-    - name: Linking workspace  
-      shell: ln -s /vagrant/workspace /home/vagrant/workspace
+    # - name: Create workspace
+    #   file: path=/vagrant/workspace state=directory owner=vagrant group=vagrant
+    # - name: Linking workspace  
+    #   shell: ln -s /vagrant/workspace /home/vagrant/workspace
 
     - name: creating dsb ipython profile
       shell: /usr/local/bin/ipython profile create dsb

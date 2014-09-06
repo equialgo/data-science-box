@@ -6,11 +6,13 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = true
   config.vm.network "forwarded_port", guest: 8888, host: 8888
   config.vm.network "forwarded_port", guest: 8998, host: 8998
+  config.vm.synced_folder "~/Projects", "/home/vagrant/Projects"
 
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "-v"
     ansible.playbook = "provisioning/dsb.yml"
   end
+
 
   config.vm.provider "virtualbox" do |vb|
     # vb.gui = true
