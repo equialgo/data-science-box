@@ -250,12 +250,14 @@
     - name: creating dsb ipython profile
       shell: /usr/local/bin/ipython profile create dsb
       sudo: no
-    - name: updating ipython configuration
+    - name: updating ipython dsb configuration
       template: src=templates/ipython_notebook_config.py.j2 dest=/home/vagrant/.ipython/profile_dsb/ipython_notebook_config.py owner=vagrant group=vagrant mode=0644 backup=true
-
-    - name: Installing oh-my-py iptyhon profile
-      shell: sudo sh ./install.sh chdir=/vagrant/provisioning/oh-my-py
-      sudo: no
+    
+    - name: creating sh ipython profile
+      shell: /usr/local/bin/ipython profile create sh
+      sudo: no  
+    - name: updating ipython sh configuration
+      template: src=templates/ipysh_ipython_config.py.j2 dest=/home/vagrant/.ipython/profile_sh/ipython_config.py owner=vagrant group=vagrant mode=0644 backup=true
 
     ##- name: Download Q
     ##get_url: url=https://raw.github.com/harelba/q/1.3.0/q dest=/home/vagrant/tools/q mode=0755 owner=vagrant group=vagrant
