@@ -54,6 +54,7 @@
         - cowsay
         - libpq-dev #postgres
         - llvm #numba dependency
+        - numexpr
 
     - name: Get Data Science at the Command Line tools, data, and scripts
       git: repo=https://github.com/jeroenjanssens/data-science-at-the-command-line.git dest=/home/vagrant/.data-science-at-the-command-line 
