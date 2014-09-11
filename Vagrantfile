@@ -9,7 +9,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "~/Projects", "/home/vagrant/Projects"
 
   config.vm.provision "ansible" do |ansible|
-    ansible.verbose = "-v"
+    #ansible.verbose = "-v"
     ansible.playbook = "provisioning/dsb.yml"
   end
 

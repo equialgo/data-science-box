@@ -52,6 +52,7 @@
         - openjdk-6-jdk
         - leiningen
         - cowsay
+        - libpq-dev #postgres
 
     - name: Get Data Science at the Command Line tools, data, and scripts
       git: repo=https://github.com/jeroenjanssens/data-science-at-the-command-line.git dest=/home/vagrant/.data-science-at-the-command-line 
@@ -115,7 +116,22 @@
         - paramiko
         - rpy2
         - bokeh
+        - psycopg2
 
+    - name: Download miniconda
+      get_url: url=http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh dest=/tmp/miniconda.sh mode=0755
+    - name: Install miniconda 
+      shell: /tmp/miniconda.sh -b -p /home/vagrant/.miniconda creates=/home/vagrant/.miniconda
+    - name: Install IOPro 
+      shell: /home/vagrant/.miniconda/bin/conda install --yes --no-deps -p /usr/local -q iopro
+    # - name: Install Accelerate 
+    #   shell: /home/vagrant/.miniconda/bin/conda install --yes -p /usr/local -q accelerate
+    # - name: Remove numpy install
+      # shell: rm -rf /usr/local/lib/python2.7/site-packages/numpy*info
+      # shell: rm -rf /usr/local/lib/python2.7/site-packages/numpy
+    - name: Move from site-packages to dist-packages
+      shell: cp -rf /usr/local/lib/python2.7/site-packages/* /usr/local/lib/python2.7/dist-packages
+      shell: rm -rf /usr/local/lib/python2.7/site-packages/* 
 
     - shell: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3D3D3ACC
     - apt_repository: repo='deb http://ppa.launchpad.net/staticfloat/juliareleases/ubuntu trusty main' state=present
@@ -231,7 +247,7 @@
 
 
 
-    #- name: Download Q
-      #get_url: url=https://raw.github.com/harelba/q/1.3.0/q dest=/home/vagrant/tools/q mode=0755 owner=vagrant group=vagrant
-    #- name: Download TextQL
+    ##- name: Download Q
+    ##get_url: url=https://raw.github.com/harelba/q/1.3.0/q dest=/home/vagrant/tools/q mode=0755 owner=vagrant group=vagrant
+    ##- name: Download TextQL
       #shell: sudo GOPATH=/home/vagrant/.go go get github.com/dinedal/textql
