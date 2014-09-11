@@ -54,7 +54,6 @@
         - cowsay
         - libpq-dev #postgres
         - llvm #numba dependency
-        - numexpr
 
     - name: Get Data Science at the Command Line tools, data, and scripts
       git: repo=https://github.com/jeroenjanssens/data-science-at-the-command-line.git dest=/home/vagrant/.data-science-at-the-command-line 
@@ -122,6 +121,7 @@
         - llvmpy
         - numba
         - cython
+        - numexpr
 
     - name: Download miniconda
       get_url: url=http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh dest=/tmp/miniconda.sh mode=0755
