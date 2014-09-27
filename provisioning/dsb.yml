@@ -70,7 +70,8 @@
         - cowsay
         - llvm-3.3 #numba dependency
         - llvm-3.3-runtime #numba dependency
-        - libpq-dev #postgres 
+        - libpq-dev #postgres dependency 
+        - python-psycopg2 #postgres dependency
 
     # INSTALLING PostgreSQL
 
@@ -165,6 +166,9 @@
 
     # INSTALLING Python
 
+    - name: Easy_install pip (apt-get gives error)
+      easy_install: name=pip
+
     - name: Install llvmpy for numba
       shell: sudo sh -c "LLVM_CONFIG_PATH=/usr/bin/llvm-config-3.3 pip install llvmpy"
 
@@ -258,8 +262,6 @@
     - name: Install xml2json
       npm: name=xml2json-command global=yes
 
-    - name: Easy_install pip (apt-get gives error)
-      easy_install: name=pip
     - name: Download GNU Parallel
       get_url: url=http://ftp.gnu.org/gnu/parallel/parallel-{{ parallel_version }}.tar.bz2 dest=/home/vagrant/parallel-{{ parallel_version }}.tar.bz2
     - name: Install GNU Parallel
