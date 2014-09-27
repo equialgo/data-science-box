@@ -9,6 +9,22 @@
     ijynb_server:
       ip: "'*'"
       port: 8998
+    locale: en_US.UTF-8
+    postgresql:
+      version: 9.3
+      repo: 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main'
+      install_development_headers: true
+      pg_username: vagrant
+      pg_password: vagrant
+      user: postgres
+      group: postgres
+      config:
+        shared_buffers: 24MB
+        work_mem: 1MB
+        checkpoint_segments: 3
+        checkpoint_completion_target: 0.5
+        effective_cache_size: 128MB
+
   tasks:
     - name: Make sure that the repos directory exists
       file: path=/home/vagrant/repos state=directory owner=vagrant group=vagrant
@@ -52,15 +68,90 @@
         - openjdk-6-jdk
         - leiningen
         - cowsay
-        - libpq-dev #postgres
         - llvm-3.3 #numba dependency
         - llvm-3.3-runtime #numba dependency
+        - libpq-dev #postgres 
 
+    # INSTALLING PostgreSQL
 
-    - name: Get Data Science at the Command Line tools, data, and scripts
-      git: repo=https://github.com/jeroenjanssens/data-science-at-the-command-line.git dest=/home/vagrant/.data-science-at-the-command-line 
-    - name: Create symlink for book directory
-      shell: ln -s /home/vagrant/.data-science-at-the-command-line/book /home/vagrant/book
+    # Needed for add-apt-repository
+    - name: Install python-software-properties
+      apt: pkg=python-software-properties state=latest
+
+    - name: Add repository key
+      apt_key: id=ACCC4CF8 url='https://www.postgresql.org/media/keys/ACCC4CF8.asc' state=present
+
+    - name: Add PostgreSQL repository
+      apt_repository: repo='{{ postgresql.repo }}' state=present  #it's
+      register: added_postgres_repo
+
+    - name: Update apt cache if we just installed the Postgres repo
+      apt: update_cache=yes
+      sudo: true
+      when: added_postgres_repo.changed
+
+    - name: Install Postgresql server and client
+      apt: pkg={{ item }}-{{ postgresql.version }} state=installed
+      register: postgresql_install
+      with_items:
+        - postgresql
+        - postgresql-contrib
+
+    #Got from:http://blog.wercker.com/2013/11/25/django-16-part3.html
+    - name: test for locale settings...
+      command: locale
+      register: locale_output
+      changed_when: False
+
+    - name: set locale to {{locale}}
+      command: /usr/sbin/update-locale LANG={{locale}} LC_ALL={{locale}} LANGUAGE={{locale}}
+      when: "'LC_ALL={{locale}}' not in locale_output.stdout"  #it's
+      sudo: yes
+
+    - name: Install PostgreSQL Host-Based-Authentication file
+      template: src=templates/pg_hba.conf.j2
+                dest=/etc/postgresql/{{ postgresql.version }}/main/pg_hba.conf
+                owner={{ postgresql.user }} group={{ postgresql.group }}
+      notify: restart postgresql
+      tags:
+        - configuration
+
+    - name: Install PostgreSQL config file
+      template: src=templates/postgresql.conf
+                dest=/etc/postgresql/{{ postgresql.version }}/main/postgresql.conf
+                owner={{ postgresql.user }} group={{ postgresql.group }}
+      notify:
+        - restart postgresql
+      tags:
+        - configuration
+
+    #Make sure that it's restarted if it needs to be
+    - meta: flush_handlers
+
+    - name: start postgresql and configure to startup automatically
+      service: name=postgresql state=started enabled=yes
+      register: started
+
+    - name: wait for postgresql restart
+      command: sleep 2
+      when: started.changed
+
+    - name: create the default postgresql user
+      postgresql_user: name={{postgresql.pg_username}} password={{postgresql.pg_password}} login_user=postgres role_attr_flags=CREATEDB,SUPERUSER
+      sudo_user: postgres
+
+    - name: test for server instrumentation
+      command: psql -c 'select * from pg_extension;' -t -A
+      sudo_user: postgres
+      register: server_instrumentation
+      changed_when: False
+
+    - name: install server instrumentation
+      command: psql -c 'CREATE EXTENSION adminpack;' -t -A
+      sudo_user: postgres
+      when: "'adminpack' not in server_instrumentation.stdout"
+
+    # INSTALLING R
 
     - shell: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
     - apt_repository: repo='deb http://cran.rstudio.com/bin/linux/ubuntu trusty/' state=present
@@ -72,22 +163,7 @@
         - sqldf
         - dplyr
 
-    - name: Install jq
-      get_url: url=http://stedolan.github.io/jq/download/linux64/jq dest=/home/vagrant/.bin/jq mode=0755 owner=vagrant group=vagrant
-
-    - name: Install json2csv
-      shell: sudo GOPATH=/home/vagrant/.go go get github.com/jehiah/json2csv
-
-    - name: Get npm
-      get_url: url=http://npmjs.org/install.sh dest=/tmp/install.sh
-    - name: Install npm
-      shell: sudo clean=yes sh /tmp/install.sh
-
-    - name: Install xml2json
-      npm: name=xml2json-command global=yes
-
-    - name: Easy_install pip (apt-get gives error)
-      easy_install: name=pip
+    # INSTALLING Python
 
     - name: Install llvmpy for numba
       shell: sudo sh -c "LLVM_CONFIG_PATH=/usr/bin/llvm-config-3.3 pip install llvmpy"
@@ -126,6 +202,9 @@
         - numba
         - cython
         - numexpr
+        - blaze
+
+    # INSTALLING Conda iopro 
 
     - name: Download miniconda
       get_url: url=http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh dest=/tmp/miniconda.sh mode=0755
@@ -142,6 +221,8 @@
       shell: cp -rf /usr/local/lib/python2.7/site-packages/* /usr/local/lib/python2.7/dist-packages/
       shell: rm -rf /usr/local/lib/python2.7/site-packages/* 
 
+    # INSTALLING Julia
+
     - shell: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3D3D3ACC
     - apt_repository: repo='deb http://ppa.launchpad.net/staticfloat/juliareleases/ubuntu trusty main' state=present
     - apt: pkg=julia state=latest update_cache=yes
@@ -149,13 +230,36 @@
       shell: sudo julia -e 'Pkg.update()'
       sudo: no
     - name: Installing Julia packages (as non-root user)
-      shell: sudo julia -e 'Pkg.add("{{item}}")'
+      shell: sudo julia -e 'Pkg.add("{{item}}")' #it"s
       sudo: no
       with_items:
         - IJulia
     - name: updating ipython configuration
       template: src=templates/ijulia_notebook_config.py.j2 dest=/home/vagrant/.ipython/profile_julia/ipython_notebook_config.py owner=vagrant group=vagrant mode=0644 backup=true
 
+    # INSTALLING DSATCL
+    
+    - name: Get Data Science at the Command Line tools, data, and scripts
+      git: repo=https://github.com/jeroenjanssens/data-science-at-the-command-line.git dest=/home/vagrant/.data-science-at-the-command-line 
+    - name: Create symlink for book directory
+      shell: ln -s /home/vagrant/.data-science-at-the-command-line/book /home/vagrant/book
+
+    - name: Install jq
+      get_url: url=http://stedolan.github.io/jq/download/linux64/jq dest=/home/vagrant/.bin/jq mode=0755 owner=vagrant group=vagrant
+
+    - name: Install json2csv
+      shell: sudo GOPATH=/home/vagrant/.go go get github.com/jehiah/json2csv
+
+    - name: Get npm
+      get_url: url=http://npmjs.org/install.sh dest=/tmp/install.sh
+    - name: Install npm
+      shell: sudo clean=yes sh /tmp/install.sh
+
+    - name: Install xml2json
+      npm: name=xml2json-command global=yes
+
+    - name: Easy_install pip (apt-get gives error)
+      easy_install: name=pip
     - name: Download GNU Parallel
       get_url: url=http://ftp.gnu.org/gnu/parallel/parallel-{{ parallel_version }}.tar.bz2 dest=/home/vagrant/parallel-{{ parallel_version }}.tar.bz2
     - name: Install GNU Parallel
@@ -246,6 +350,8 @@
     #   file: path=/vagrant/workspace state=directory owner=vagrant group=vagrant
     # - name: Linking workspace  
     #   shell: ln -s /vagrant/workspace /home/vagrant/workspace
+    
+    # INSTALLING iPython profiles
 
     - name: creating dsb ipython profile
       shell: /usr/local/bin/ipython profile create dsb
@@ -262,4 +368,9 @@
     ##- name: Download Q
     ##get_url: url=https://raw.github.com/harelba/q/1.3.0/q dest=/home/vagrant/tools/q mode=0755 owner=vagrant group=vagrant
     ##- name: Download TextQL
-    ##shell: sudo GOPATH=/home/vagrant/.go go get github.com/dinedal/textql
+    ##shell: sudo GOPATH=/home/vagrant/.go go get github.com/dinedal/textql  
+
+  handlers:
+
+    - name: restart postgresql
+      service: name=postgresql state=restarted enabled=yes
