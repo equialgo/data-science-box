@@ -72,8 +72,7 @@
         - llvm-3.3-runtime #numba dependency
         - libpq-dev #postgres dependency 
         - python-psycopg2 #postgres dependency
-    - name: Install mysql-connector-python
-      pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
+
     # INSTALLING PostgreSQL
 
     # Needed for add-apt-repository
@@ -208,7 +207,9 @@
         - cython
         - numexpr
         - blaze
-
+    - name: Install mysql-connector-python
+      pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
+      
     # INSTALLING Conda iopro 
 
     - name: Download miniconda
