@@ -72,7 +72,8 @@
         - llvm-3.3-runtime #numba dependency
         - libpq-dev #postgres dependency 
         - python-psycopg2 #postgres dependency
-
+    - name: Install mysql-connector-python
+      pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
     # INSTALLING PostgreSQL
 
     # Needed for add-apt-repository
@@ -318,12 +319,12 @@
     - name: Install csvquote
       shell: chdir=/home/vagrant/repos/csvquote make; make install
 
-    - name: Get mysql-connector-python
-      get_url: url=http://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.2.3.zip dest=/home/vagrant/repos/mysql-connector-python.zip
-    - name: Unzip mysql-connector-python
-      shell: chdir=/home/vagrant/repos unzip mysql-connector-python.zip
-    - name: Install mysql-connector-python
-      shell: chdir=/home/vagrant/repos/mysql-connector-python-1.2.3 python setup.py install
+    #- name: Get mysql-connector-python
+    #  get_url: url=http://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.2.3.zip dest=/home/vagrant/repos/mysql-connector-python.zip
+    #- name: Unzip mysql-connector-python
+    #  shell: chdir=/home/vagrant/repos unzip mysql-connector-python.zip
+    #- name: Install mysql-connector-python
+    #  shell: chdir=/home/vagrant/repos/mysql-connector-python-1.2.3 python setup.py install
 
     - name: Delete repos directory
       shell: rm -rf /home/vagrant/repos
