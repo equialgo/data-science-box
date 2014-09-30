@@ -7,10 +7,13 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 8888, host: 8888
   config.vm.network "forwarded_port", guest: 8998, host: 8998
   config.vm.synced_folder "~/Projects", "/home/vagrant/Projects"
+  # Forward port 5432 on the gust to 5432 on the host
+  config.vm.network "forwarded_port", guest: 5432, host: 5432
 
   config.vm.provision "ansible" do |ansible|
-    #ansible.verbose = "-vv"
+    ansible.verbose = "-vv"
     ansible.playbook = "provisioning/dsb.yml"
+
   end
 
 
