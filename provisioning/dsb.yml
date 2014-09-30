@@ -207,6 +207,7 @@
         - cython
         - numexpr
         - blaze
+        - naturalsort
     - name: Install mysql-connector-python
       pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
       
