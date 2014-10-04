@@ -80,6 +80,10 @@
         - cimg-dev #pHash 
         - libavcodec-dev #pHash 
         - libswscale-dev #pHash 
+        - libmemcached-dev #nbviewer
+        - libcurl4-openssl-dev #nbviewer
+        - pandoc #nbviewer
+        - libevent-dev #nbviewer
 
     # INSTALLING PostgreSQL
 
@@ -271,6 +275,13 @@
         - IJulia
     - name: updating ipython configuration
       template: src=templates/ijulia_notebook_config.py.j2 dest=/home/vagrant/.ipython/profile_julia/ipython_notebook_config.py owner=vagrant group=vagrant mode=0644 backup=true
+
+    # INSTALLING nbviewer
+
+    - name: Getting nbviewer repo
+      git: repo=https://github.com/ipython/nbviewer.git dest=/home/vagrant/.nbviewer/
+    - name: Installing nbviewer dependencies
+      shell: chdir=/home/vagrant/.nbviewer pip install -r requirements.txt  
 
     # INSTALLING DSATCL
     
