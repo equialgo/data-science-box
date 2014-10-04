@@ -220,6 +220,7 @@
         - numexpr
         - blaze
         - naturalsort
+        - graphlab-create
     - name: Install mysql-connector-python
       pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
     
@@ -280,7 +281,7 @@
 
     - name: Getting nbviewer repo
       git: repo=https://github.com/ipython/nbviewer.git dest=/home/vagrant/.nbviewer/
-    - name: Installing nbviewer dependencies
+    - name: Installing nbviewer depndencies
       shell: chdir=/home/vagrant/.nbviewer pip install -r requirements.txt  
 
     # INSTALLING DSATCL
