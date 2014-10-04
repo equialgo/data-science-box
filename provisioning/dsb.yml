@@ -234,10 +234,10 @@
         ldconfig /usr/local/lib
       args:
         chdir: /home/vagrant/
-    - name: Install py-pHash
+    - name: Getting py-phash repo
       git: repo=https://github.com/polachok/py-phash.git dest=/home/vagrant/repos/py-phash/
+    - name: Install py-phash
       shell: chdir=/home/vagrant/repos/py-phash python setup.py install
-
 
     # INSTALLING Conda iopro 
 
