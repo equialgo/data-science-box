@@ -361,13 +361,8 @@
     - name: Install csvquote
       shell: chdir=/home/vagrant/repos/csvquote make; make install
 
-    #- name: Get mysql-connector-python
-    #  get_url: url=http://dev.mysql.com/get/Downloads/Connector-Python/mysql-connector-python-1.2.3.zip dest=/home/vagrant/repos/mysql-connector-python.zip
-    #- name: Unzip mysql-connector-python
-    #  shell: chdir=/home/vagrant/repos unzip mysql-connector-python.zip
-    #- name: Install mysql-connector-python
-    #  shell: chdir=/home/vagrant/repos/mysql-connector-python-1.2.3 python setup.py install
-
+    # FINISHING UP
+    
     - name: Delete repos directory
       shell: rm -rf /home/vagrant/repos
 
