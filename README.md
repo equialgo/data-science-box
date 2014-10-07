@@ -17,8 +17,9 @@ Installion requires:
 
 # Usage
 
-* **IPython Notebook sever**: execute *./ipynb_server.sh*
-* **IJulia Notebook sever**: execute *./ijynb_server.sh*
-* **IPython shell**: execute *./ipysh.sh*
-* **Wiki**: execute *./wiki.sh*
+Run:
+* *./ipynb_server.sh* for the **IPython notebook server**
+* *./ijynb_server.sh* for the **IJulia notebook server**
+* *./ipysh.sh* for the **IPython shell**
+* *./wiki.sh* for the **Wiki**
 
