@@ -5,7 +5,7 @@ This virtual machine for performing data science is based on the virtual machine
 
 # Requirements
 
-Installion requires:
+Installation requires:
 * [Vagrant](https://www.vagrantup.com)
 * [VirtualBox](https://www.virtualbox.org)
 * [Ansible](http://www.ansible.com/home)
