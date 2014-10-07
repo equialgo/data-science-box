@@ -23,3 +23,4 @@ Run:
 * *./ipysh.sh* for the **IPython shell**
 * *./wiki.sh* for the **Wiki**
 
+Notebook that the vagrant box is configured such that it automatically mounts the *~/Projects* folder. 
