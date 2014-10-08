@@ -50,8 +50,8 @@
         - zlib1g-dev # lxml
         - libfreetype6-dev # for matplotlib
         - tree
-        - libwebp-dev
         - webp
+        - libwebp-dev #http://askubuntu.com/questions/251950/imagemagick-convert-cant-convert-to-webp
         - imagemagick # display
         - feedgnuplot
         - bc
