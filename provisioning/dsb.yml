@@ -50,6 +50,8 @@
         - zlib1g-dev # lxml
         - libfreetype6-dev # for matplotlib
         - tree
+        - libwebp-dev
+        - webp
         - imagemagick # display
         - feedgnuplot
         - bc
