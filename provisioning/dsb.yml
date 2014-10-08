@@ -50,9 +50,9 @@
         - zlib1g-dev # lxml
         - libfreetype6-dev # for matplotlib
         - tree
-        - webp
-        - libwebp-dev #http://askubuntu.com/questions/251950/imagemagick-convert-cant-convert-to-webp
-        - imagemagick # display
+        - webp #converting webp images
+        - libwebp-dev #ImageMagic
+        # - imagemagick # display
         - feedgnuplot
         - bc
         - libeigen3-dev #tapkee
@@ -226,7 +226,23 @@
         - pillow
     - name: Install mysql-connector-python
       pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
-    
+  
+     # INSTALLING imageMagick
+  
+    - name: Download ImageMagick
+      get_url: url=http://www.imagemagick.org/download/ImageMagick.tar.gz dest=/home/vagrant/ImageMagick.tar.gz
+    - name: Install pHash Parallel
+      shell: | 
+        tar -xvzf /home/vagrant/ImageMagick.tar.gz
+        rm /home/vagrant/ImageMagick.tar.gz
+        cd ImageMagick-*
+        ./configure && make && make install
+        cd ..
+        rm -rf ImageMagick-*
+        ldconfig /usr/local/lib
+      args:
+        chdir: /home/vagrant/
+        
     # INSTALLING pHash and py-phash
 
     - name: Download pHash
