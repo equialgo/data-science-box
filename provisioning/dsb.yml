@@ -86,6 +86,7 @@
         - libcurl4-openssl-dev #nbviewer
         - pandoc #nbviewer
         - libevent-dev #nbviewer
+        - libmysqlclient-dev #MySQL-python
 
     # INSTALLING PostgreSQL
 
@@ -225,6 +226,7 @@
         - graphlab-create
         - pillow
         - imagehash
+        - MySQL-python
     - name: Install mysql-connector-python
       pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
   
