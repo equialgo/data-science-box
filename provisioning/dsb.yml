@@ -10,6 +10,9 @@
     ijynb_server:
       ip: "'*'"
       port: 8998
+    ir_server:
+      ip: "'*'"
+      port: 9889
     locale: en_US.UTF-8
     postgresql:
       version: 9.3
@@ -423,9 +426,17 @@
     
     - name: creating sh ipython profile
       shell: /usr/local/bin/ipython profile create sh
-      sudo: no  
+      sudo: no 
     - name: updating ipython sh configuration
       template: src=templates/ipysh_ipython_config.py.j2 dest=/home/vagrant/.ipython/profile_sh/ipython_config.py owner=vagrant group=vagrant mode=0644 backup=true
+
+    - name: creating ir profile
+      shell: /usr/local/bin/ipython profile create r
+      sudo: no
+    - name: updating ir configuration
+      template: src=templates/ir_notebook_config.py.j2 dest=/home/vagrant/.ipython/profile_r/ipython_notebook_config.py owner=vagrant group=vagrant mode=0644 backup=true
+    - name: updating ir startup script
+      template: src=templates/rkernely.py dest=/home/vagrant/.ipython/profile_r/startup/rkernely.py owner=vagrant group=vagrant mode=0644 backup=true
 
     ##- name: Download Q
     ##get_url: url=https://raw.github.com/harelba/q/1.3.0/q dest=/home/vagrant/tools/q mode=0755 owner=vagrant group=vagrant

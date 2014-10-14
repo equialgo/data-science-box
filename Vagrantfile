@@ -6,6 +6,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = true
   config.vm.network "forwarded_port", guest: 8888, host: 8888 #ipynb_server
   config.vm.network "forwarded_port", guest: 8998, host: 8998 #ijulia_server
+  config.vm.network "forwarded_port", guest: 9889, host: 9889 #ir_server
   config.vm.network "forwarded_port", guest: 5000, host: 5000 #nbviewer
   config.vm.network "forwarded_port", guest: 5432, host: 5432 #postgres
   config.vm.synced_folder "~/Projects", "/home/vagrant/Projects"

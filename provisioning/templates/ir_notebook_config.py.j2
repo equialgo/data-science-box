@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+
+c = get_config()
+c.IPKernelApp.pylab = 'inline'
+c.NotebookApp.ip = {{ irnb_server.ip }}
+c.NotebookApp.port = {{ irnb_server.port }}
+c.NotebookApp.open_browser = False
