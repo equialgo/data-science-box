@@ -55,7 +55,6 @@
         - tree
         - webp #converting webp images
         - libwebp-dev #ImageMagic
-        # - imagemagick # display
         - feedgnuplot
         - bc
         - libeigen3-dev #tapkee
@@ -231,6 +230,7 @@
         - imagehash
         - MySQL-python
         - python-levenshtein
+        - git+https://github.com/quantopian/qgrid#egg=qgrid
     - name: Install mysql-connector-python
       pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
   
