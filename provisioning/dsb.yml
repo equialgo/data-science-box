@@ -89,7 +89,8 @@
         - pandoc #nbviewer
         - libevent-dev #nbviewer
         - libmysqlclient-dev #MySQL-python
-        - atop #system monitor
+        - htop #system monitor
+        - vim #text editor
 
     # INSTALLING PostgreSQL
 
