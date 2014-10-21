@@ -235,6 +235,7 @@
         - python-levenshtein
         - git+https://github.com/quantopian/qgrid#egg=qgrid
         - gloo
+        - networkx
     - name: Install mysql-connector-python
       pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
   
