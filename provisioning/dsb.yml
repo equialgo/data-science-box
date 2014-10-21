@@ -91,6 +91,7 @@
         - libmysqlclient-dev #MySQL-python
         - htop #system monitor
         - vim #text editor
+        - mercurial #scm
 
     # INSTALLING PostgreSQL
 
