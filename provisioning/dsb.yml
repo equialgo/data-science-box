@@ -357,7 +357,7 @@
 
     - name: Move Drake
       shell: cp /vagrant/provisioning/drake/drake.jar /home/vagrant/.bin/
-    
+
     - name: Get Drip
       git: repo=https://github.com/flatland/drip.git dest=/home/vagrant/.drip-repo
     - name: Install Drip
@@ -381,22 +381,27 @@
       args:
         chdir: /home/vagrant/repos
 
-    #- name: Get Tapkee
-      #git: repo=https://github.com/lisitsyn/tapkee.git dest=/home/vagrant/repos/tapkee/
-    #- file: path=/home/vagrant/repos/tapkee/build state=directory 
-    #- shell: cmake .. && make
-      #args:
-        #chdir: /home/vagrant/repos/tapkee/build
-    #- name: Move Tapkee
-      #shell: mv /home/vagrant/repos/tapkee/bin/tapkee /home/vagrant/.bin/
-
+    - name: Get Tapkee
+      git: repo=https://github.com/lisitsyn/tapkee.git dest=/home/vagrant/repos/tapkee/
+    - file: path=/home/vagrant/repos/tapkee/build state=directory 
+    - shell: cmake .. && make
+      args:
+        chdir: /home/vagrant/repos/tapkee/build
+    - name: Move Tapkee
+      shell: mv /home/vagrant/repos/tapkee/bin/tapkee /home/vagrant/.bin/
     - name: Clone csvquote
       git: repo=https://github.com/dbro/csvquote.git dest=/home/vagrant/repos/csvquote/
+
+    - name: Get CRUSH
+      get_url: url=http://crush-tools.googlecode.com/files/crush-tools-2013-04.tar.gz dest=/tmp/crush.tar.gz
+    - name: Unpack CRUSH
+      shell: chdir=/tmp/ tar -xzvf crush.tar.gz; cd crush-tools-*; ./configure; make; make install; ldconfig
+
     - name: Install csvquote
       shell: chdir=/home/vagrant/repos/csvquote make; make install
 
     # FINISHING UP
-    
+
     - name: Delete repos directory
       shell: rm -rf /home/vagrant/repos
 
@@ -420,11 +425,7 @@
     - name: Change owner
       file: path=/home/vagrant state=directory owner=vagrant group=vagrant recurse=yes
 
-    # - name: Create workspace
-    #   file: path=/vagrant/workspace state=directory owner=vagrant group=vagrant
-    # - name: Linking workspace  
-    #   shell: ln -s /vagrant/workspace /home/vagrant/workspace
-    
+
     # INSTALLING iPython profiles
 
     - name: creating dsb ipython profile
@@ -432,7 +433,7 @@
       sudo: no
     - name: updating ipython dsb configuration
       template: src=templates/ipython_notebook_config.py.j2 dest=/home/vagrant/.ipython/profile_dsb/ipython_notebook_config.py owner=vagrant group=vagrant mode=0644 backup=true
-    
+
     - name: creating sh ipython profile
       shell: /usr/local/bin/ipython profile create sh
       sudo: no 
@@ -447,10 +448,10 @@
     - name: updating ir startup script
       template: src=templates/rkernel.py dest=/home/vagrant/.ipython/profile_r/startup/rkernel.py owner=vagrant group=vagrant mode=0644 backup=true
 
-    ##- name: Download Q
-    ##get_url: url=https://raw.github.com/harelba/q/1.3.0/q dest=/home/vagrant/tools/q mode=0755 owner=vagrant group=vagrant
-    ##- name: Download TextQL
-    ##shell: sudo GOPATH=/home/vagrant/.go go get github.com/dinedal/textql  
+    #- name: Download Q
+    #get_url: url=https://raw.github.com/harelba/q/1.3.0/q dest=/home/vagrant/tools/q mode=0755 owner=vagrant group=vagrant
+    #- name: Download TextQL
+    #shell: sudo GOPATH=/home/vagrant/.go go get github.com/dinedal/textql  
 
   handlers:
 
