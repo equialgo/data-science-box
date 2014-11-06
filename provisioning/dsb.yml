@@ -49,10 +49,10 @@
         - git
         - python-pycurl
         - python-dev
-        - libxml2-dev # lxml
-        - libxslt1-dev # lxml
-        - zlib1g-dev # lxml
-        - libfreetype6-dev # for matplotlib
+        - libxml2-dev #lxml
+        - libxslt1-dev #lxml
+        - zlib1g-dev #lxml
+        - libfreetype6-dev #matplotlib
         - tree
         - webp #converting webp images
         - libwebp-dev #ImageMagic
@@ -93,6 +93,8 @@
         - htop #system monitor
         - vim #text editor
         - mercurial #scm
+        - build-essential #scipy, numpy
+        - gfortran #scipy, numpy
 
     # INSTALLING PostgreSQL
 
