@@ -239,6 +239,7 @@
         - scrapy
         - service_identity
         - beautifulsoup
+        - db.py
     - name: Install mysql-connector-python
       pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
   
