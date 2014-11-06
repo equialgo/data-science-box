@@ -4,6 +4,7 @@
   vars:
     parallel_version: 20140622
     pHash_version: 0.9.6
+    rro_installer: RRO-8.0-Beta-Ubuntu-14.04.x86_64
     ipynb_server:
       ip: "'*'"
       port: 8888
@@ -174,9 +175,13 @@
 
     # INSTALLING R
 
-    - shell: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
-    - apt_repository: repo='deb http://cran.rstudio.com/bin/linux/ubuntu trusty/' state=present
-    - apt: pkg=r-base-dev state=latest update_cache=yes
+    - name: Get Revolution R Open (RRO)
+      get_url: url=http://mran.revolutionanalytics.com/install/{{ rro_installer }}.tar.gz dest=/tmp/RRO.tar.gz
+    - name: Install Revolution R Open (RRO)
+      shell: chdir=/tmp/ tar -xzvf RRO.tar.gz; ./install.sh;
+    # - shell: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+    # - apt_repository: repo='deb http://cran.rstudio.com/bin/linux/ubuntu trusty/' state=present
+    # - apt: pkg=r-base-dev state=latest update_cache=yes
     - name: Install R packages
       shell: echo "install.packages(c('{{item}}'),repos='http://cran.us.r-project.org')" | R --slave --no-save --no-restore-history
       with_items:
