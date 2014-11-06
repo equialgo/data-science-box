@@ -66,6 +66,8 @@
         - make
         - curl
         - g++
+        - build-essential #scipy, numpy
+        - gfortran #scipy, numpy
         - python-software-properties 
         - python-setuptools
         - p7zip-full
@@ -93,8 +95,6 @@
         - htop #system monitor
         - vim #text editor
         - mercurial #scm
-        - build-essential #scipy, numpy
-        - gfortran #scipy, numpy
 
     # INSTALLING PostgreSQL
 
