@@ -254,7 +254,7 @@
   
     - name: Download ImageMagick
       get_url: url=http://www.imagemagick.org/download/ImageMagick.tar.gz dest=/home/vagrant/ImageMagick.tar.gz
-    - name: Install pHash Parallel
+    - name: Install ImageMagick
       shell: | 
         tar -xvzf /home/vagrant/ImageMagick.tar.gz
         rm /home/vagrant/ImageMagick.tar.gz
