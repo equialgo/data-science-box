@@ -182,10 +182,10 @@
     - name: Install Revolution R Open (RRO)
       shell: chdir=/tmp/ tar -xzvf RRO.tar.gz; ./install.sh;
     - name: Symbolic linking libR.so fixing rpy2 compile error 
-      shell: ln -s /usr/lib64/RRO-*/R-*/lib/R/lib/libR.so /usr/lib64/libR.so 
+      shell: ln -sf /usr/lib64/RRO-*/R-*/lib/R/lib/libR.so /usr/lib64/libR.so 
       # check http://stackoverflow.com/questions/16710047/usr-bin-ld-cannot-find-lnameofthelibrary 
       # run: ld -l<nameofthelibrary> --verbose to check out where the symbolic link should go!
-      
+
     # - shell: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
     # - apt_repository: repo='deb http://cran.rstudio.com/bin/linux/ubuntu trusty/' state=present
     # - apt: pkg=r-base-dev state=latest update_cache=yes
