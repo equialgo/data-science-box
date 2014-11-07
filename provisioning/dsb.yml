@@ -420,6 +420,7 @@
         - bash_completion
         - bashrc
         - profile
+        - psqlrc
 
     - name: Create symlink for MOTD
       shell: ln -sf /vagrant/provisioning/motd/{{ item }} /etc/update-motd.d/{{ item }}
