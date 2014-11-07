@@ -92,3 +92,8 @@ fi
 if [ -f ~/.bash_completion ] && ! shopt -oq posix; then
 	. ~/.bash_completion
 fi
+
+
+# adding Revolution R Open paths
+export R_HOME=/usr/lib64/R
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib64/R/lib/

@@ -183,6 +183,8 @@
       shell: chdir=/tmp/ tar -xzvf RRO.tar.gz; ./install.sh;
     - name: Symbolic linking libR.so fixing rpy2 compile error 
       shell: ln -sf /usr/lib64/RRO-*/R-*/lib/R/lib/libR.so /usr/lib64/libR.so 
+    - name: Symbolic linking R home directory
+      shell: ln -sf /usr/lib64/RRO-*/R-*/lib/R /usr/lib64/R
       # check http://stackoverflow.com/questions/16710047/usr-bin-ld-cannot-find-lnameofthelibrary 
       # run: ld -l<nameofthelibrary> --verbose to check out where the symbolic link should go!
 
@@ -196,7 +198,7 @@
         - sqldf
         - dplyr
 
-    # INSTALLING Python
+    # # INSTALLING Python
 
     - name: Easy_install pip (apt-get gives error)
       easy_install: name=pip
@@ -252,6 +254,7 @@
         - service_identity
         - beautifulsoup
         - db.py
+        - singledispatch
     - name: Install mysql-connector-python
       pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
   
