@@ -95,6 +95,7 @@
         - htop #system monitor
         - vim #text editor
         - mercurial #scm
+        - libreadline-dev #rpy2
 
     # INSTALLING PostgreSQL
 
