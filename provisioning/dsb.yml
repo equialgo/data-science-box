@@ -96,8 +96,6 @@
         - vim #text editor
         - mercurial #scm
         - libreadline-dev #rpy2
-        - gensim
-        - nltk
 
     # INSTALLING PostgreSQL
 
@@ -258,6 +256,8 @@
         - beautifulsoup
         - db.py
         - singledispatch
+        - gensim
+        - nltk
     - name: Install mysql-connector-python
       pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
   
