@@ -96,6 +96,8 @@
         - vim #text editor
         - mercurial #scm
         - libreadline-dev #rpy2
+        - gensim
+        - nltk
 
     # INSTALLING PostgreSQL
 
