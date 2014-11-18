@@ -98,7 +98,9 @@
         - libreadline-dev #rpy2
         - libz-dev #Vowpal Wabbit
         - libboost-program-options-dev #Vowpal Wabbit
+        - libboost-all-dev #Vowpal Wabbit
         - libtool #Vowpal Wabbit
+        - automake #Vowpal Wabbit
         
     # INSTALLING PostgreSQL
 
@@ -345,7 +347,7 @@
     - name: Getting Vowpal Wabbit repo
       git: repo=https://github.com/JohnLangford/vowpal_wabbit.git dest=/home/vagrant/repos/vowpal_wabbit/
     - name: Install Vowpal Wabbit
-      shell: chdir=/home/vagrant/repos/vowpal_wabbit/ ./configure; make; make install; ldconfig
+      shell: chdir=/home/vagrant/repos/vowpal_wabbit/ ./autogen.sh; make; make install; ldconfig
       
     # INSTALLING DSATCL
     
