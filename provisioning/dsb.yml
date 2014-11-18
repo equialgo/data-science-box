@@ -96,11 +96,7 @@
         - vim #text editor
         - mercurial #scm
         - libreadline-dev #rpy2
-        - libz-dev #Vowpal Wabbit
-        - libboost-program-options-dev #Vowpal Wabbit
-        - libboost-all-dev #Vowpal Wabbit
-        - libtool #Vowpal Wabbit
-        - automake #Vowpal Wabbit
+        - vowpal-wabbit
         
     # INSTALLING PostgreSQL
 
@@ -341,13 +337,6 @@
       git: repo=https://github.com/ipython/nbviewer.git dest=/home/vagrant/.nbviewer/
     - name: Installing nbviewer depndencies
       shell: chdir=/home/vagrant/.nbviewer pip install -r requirements.txt  
-
-    # INSTALLING Vowpal Wabbit
-
-    - name: Getting Vowpal Wabbit repo
-      git: repo=https://github.com/JohnLangford/vowpal_wabbit.git dest=/home/vagrant/repos/vowpal_wabbit/
-    - name: Install Vowpal Wabbit
-      shell: chdir=/home/vagrant/repos/vowpal_wabbit/ ./autogen.sh; make; make install; ldconfig
       
     # INSTALLING DSATCL
     
