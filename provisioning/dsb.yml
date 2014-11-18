@@ -96,7 +96,8 @@
         - vim #text editor
         - mercurial #scm
         - libreadline-dev #rpy2
-        - vowpal-wabbit
+        - libboost-program-options-dev #Vowpal Wabbit
+        - libboost-python-dev #Vowpal Wabbit
         
     # INSTALLING PostgreSQL
 
