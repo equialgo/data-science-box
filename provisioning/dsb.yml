@@ -16,7 +16,7 @@
       port: 9889
     locale: en_US.UTF-8
     postgresql:
-      version: 9.3
+      version: 9.4
       repo: 'deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main'
       install_development_headers: true
       pg_username: vagrant
