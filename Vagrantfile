@@ -9,6 +9,7 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 9889, host: 9889 #ir_server
   config.vm.network "forwarded_port", guest: 5000, host: 5000 #nbviewer
   config.vm.network "forwarded_port", guest: 5432, host: 5432 #postgres
+  config.vm.network "forwarded_port", guest: 8787, host: 8787 #RStudio server
   config.vm.synced_folder "~/Projects", "/home/vagrant/Projects"
 
   config.vm.provision "ansible" do |ansible|

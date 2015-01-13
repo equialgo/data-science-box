@@ -4,7 +4,8 @@
   vars:
     parallel_version: 20140622
     pHash_version: 0.9.6
-    rro_installer: RRO-8.0-Beta-Ubuntu-14.04.x86_64
+    rro_installer: RRO-8.0.1-Beta3-Ubuntu-14.04.x86_64
+    rserver_installer: rstudio-server-0.98.1091-amd64
     ipynb_server:
       ip: "'*'"
       port: 8888
@@ -98,6 +99,7 @@
         - libreadline-dev #rpy2
         - libboost-program-options-dev #Vowpal Wabbit
         - libboost-python-dev #Vowpal Wabbit
+        - libopenblas-dev #Theano
         
     # INSTALLING PostgreSQL
 
@@ -200,6 +202,17 @@
         - ggplot2
         - sqldf
         - dplyr
+
+    - name: Install R-Studio server dependencies
+      apt: pkg={{item}} state=latest
+      with_items:
+        - gdebi-core
+        - libapparmor1
+
+    - name: Get R-Studio sever .deb file
+      get_url: url=http://download2.rstudio.org/{{ rserver_installer }}.deb dest=/tmp/rstudio-server.deb
+    - name: Install deb file
+      shell: gdebi -qn /tmp/rstudio-server.deb
 
     # # INSTALLING Python
 
@@ -458,6 +471,8 @@
     - name: Change owner
       file: path=/home/vagrant state=directory owner=vagrant group=vagrant recurse=yes
 
+    - name: Set passwd for vagrant to vagrant
+      shell: echo "vagrant:vagrant" | chpasswd
 
     # INSTALLING iPython profiles
 
