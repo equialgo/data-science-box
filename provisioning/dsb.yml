@@ -100,7 +100,14 @@
         - libboost-program-options-dev #Vowpal Wabbit
         - libboost-python-dev #Vowpal Wabbit
         - libopenblas-dev #Theano
-        
+
+    # Installing npm
+
+    - name: Get npm
+      get_url: url=http://npmjs.org/install.sh dest=/tmp/install.sh
+    - name: Install npm
+      shell: sudo clean=yes sh /tmp/install.sh
+
     # INSTALLING PostgreSQL
 
     # Needed for add-apt-repository
@@ -353,8 +360,18 @@
 
     - name: Getting nbviewer repo
       git: repo=https://github.com/ipython/nbviewer.git dest=/home/vagrant/.nbviewer/
-    - name: Installing nbviewer depndencies
-      shell: chdir=/home/vagrant/.nbviewer pip install -r requirements.txt  
+    - name: Installing nbviewer dev-dependencies
+      shell: chdir=/home/vagrant/.nbviewer pip install -r dev-requirements.txt  
+    - name: Install bower
+      npm: name=bower global=yes
+    - name: Install less
+      npm: name=less global=yes
+    - name: Installing nbviewer dependencies
+      shell: chdir=/home/vagrant/.nbviewer pip install -r requirements.txt 
+    - name: Invoke bower
+      shell:  chdir=/home/vagrant/.nbviewer invoke bower
+    - name: Invoke less
+      shell:  chdir=/home/vagrant/.nbviewer invoke less
     
     # INSTALLING Vowpal Wabbit
     
@@ -375,11 +392,6 @@
 
     - name: Install json2csv
       shell: sudo GOPATH=/home/vagrant/.go go get github.com/jehiah/json2csv
-
-    - name: Get npm
-      get_url: url=http://npmjs.org/install.sh dest=/tmp/install.sh
-    - name: Install npm
-      shell: sudo clean=yes sh /tmp/install.sh
 
     - name: Install xml2json
       npm: name=xml2json-command global=yes
