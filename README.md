@@ -19,8 +19,11 @@ Installation requires:
 
 Run:
 * *./ipynb_server.sh* for the **IPython notebook server**
-* *./ijynb_server.sh* for the **IJulia notebook server**
+* *./ijunb_server.sh* for the **IJulia notebook server**
+* *./irnb_server.sh* for the **IR notebook server**
 * *./ipysh.sh* for the **IPython shell**
 * *./wiki.sh* for the **Wiki**
+
+The RStudio server can be reached via http://localhost:8787/ using the login: *vargrant* and passwrd: *vagrant*.
 
 Note that the ds box is configured such that it automatically mounts the *~/Projects* folder. 
