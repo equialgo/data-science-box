@@ -1,0 +1,22 @@
+---
+- name: creating dsb ipython profile
+  shell: /usr/local/bin/ipython profile create dsb
+  sudo: no
+  tags:
+    - ipython-profiles
+
+- name: updating ipython dsb configuration
+  template: src=ipython_notebook_config.py.j2 dest=/home/vagrant/.ipython/profile_dsb/ipython_notebook_config.py owner=vagrant group=vagrant mode=0644 backup=true
+  tags:
+    - ipython-profiles
+
+- name: creating sh ipython profile
+  shell: /usr/local/bin/ipython profile create sh
+  sudo: no 
+  tags:
+    - ipython-profiles
+
+- name: updating ipython sh configuration
+  template: src=ipysh_ipython_config.py.j2 dest=/home/vagrant/.ipython/profile_sh/ipython_config.py owner=vagrant group=vagrant mode=0644 backup=true
+  tags:
+    - ipython-profiles

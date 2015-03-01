@@ -1,0 +1,20 @@
+---
+- name: Make sure that the .bin directory exists
+  file: path=/home/vagrant/.bin state=directory owner=vagrant group=vagrant
+  tags:
+    -weka
+
+- name: Get Weka
+  shell: wget -O /tmp/weka.zip http://downloads.sourceforge.net/project/weka/weka-3-7/3.7.12/weka-3-7-12.zip
+  tags:
+    -weka
+
+- name: Install Weka
+  shell: unzip -o /tmp/weka.zip -d /tmp/weka
+  tags:
+    -weka
+
+- name: Install Weka
+  shell: mv /tmp/weka/weka-3-7-12/weka.jar /home/vagrant/.bin/weka.jar
+  tags:
+    -weka

@@ -1,0 +1,14 @@
+---
+- name: Install python apt packages 
+  apt: pkg={{item}} state=latest
+  with_items:
+    - libreadline-dev #rpy2
+  tags: 
+    - rpy2
+
+- name: Install rpy2 package
+  pip: name={{item}} state=latest
+  with_items:
+    - rpy2
+  tags:
+    - rpy2  

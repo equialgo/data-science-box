@@ -1,0 +1,5 @@
+---
+- include: rro.yml
+- include: rstudio-server.yml
+- include: ir-kernel.yml
+- include: rpy2.yml

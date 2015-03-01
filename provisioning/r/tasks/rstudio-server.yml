@@ -1,0 +1,19 @@
+---
+- name: Install R-Studio server dependencies
+  apt: pkg={{item}} state=latest
+  with_items:
+    - gdebi-core
+    - libapparmor1
+  tags: 
+    - rstudio-server
+
+- name: Get R-Studio sever .deb file
+  get_url: url=http://download2.rstudio.org/{{ rstudio_installer }}.deb dest=/tmp/rstudio-server.deb
+  tags: 
+    - rstudio-server
+
+- name: Install deb file
+  shell: gdebi -qn /tmp/rstudio-server.deb
+  tags: 
+    - rstudio-server
+

@@ -1,0 +1,14 @@
+---
+- name: Updating Julia packages (as non-root user)
+  shell: sudo julia -e 'Pkg.update()'
+  sudo: no
+  tags:
+    - ijulia
+
+- name: Installing IJulia package (as non-root user)
+  shell: sudo julia -e 'Pkg.add("{{item}}")' #it"s
+  sudo: no
+  with_items:
+    - IJulia
+  tags:
+    - ijulia

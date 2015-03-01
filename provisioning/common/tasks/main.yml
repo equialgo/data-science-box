@@ -1,0 +1,6 @@
+---
+- include: locale.yml
+- include: utils.yml
+- include: ntp.yml
+- include: dotfiles.yml
+- include: vagrant.yml

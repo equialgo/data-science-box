@@ -1,0 +1,25 @@
+---
+- name: Setting bash_aliases
+  template: src=bash_aliases dest=/home/vagrant/.bash_aliases mode=0744
+  tags:
+    - dotfiles
+
+- name: Setting bash_completion
+  template: src=bash_completion dest=/home/vagrant/.bash_completion mode=0744
+  tags:
+    - dotfiles
+
+- name: Setting bash_prompt
+  template: src=bash_prompt dest=/home/vagrant/.bash_prompt mode=0744
+  tags:
+    - dotfiles
+
+- name: Setting bashrc
+  template: src=bashrc dest=/home/vagrant/.bashrc mode=0744
+  tags:
+    - dotfiles
+
+- name: Setting profile
+  template: src=profile dest=/home/vagrant/.profile mode=0744
+  tags:
+    - dotfiles

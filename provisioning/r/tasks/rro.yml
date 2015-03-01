@@ -1,0 +1,26 @@
+---
+- name: Get Revolution R Open (RRO)
+  get_url: url=http://mran.revolutionanalytics.com/install/{{ rro_installer }}.tar.gz dest=/tmp/RRO.tar.gz
+  tags:
+    - rro
+
+- name: Install Revolution R Open (RRO)
+  shell: chdir=/tmp/ tar -xzvf RRO.tar.gz; ./install.sh;
+  tags: 
+    - rro
+
+- name: Symbolic linking libR.so fixing rpy2 compile error 
+  shell: ln -sf /usr/lib64/RRO-*/R-*/lib/R/lib/libR.so /usr/lib64/libR.so
+  tags: 
+    - rro
+
+- name: Symbolic linking R home directory
+  shell: ln -sf /usr/lib64/RRO-*/R-*/lib/R /usr/lib64/R
+  tags: 
+    - rro
+
+- name: Install R packages
+  shell: echo "install.packages(c('{{item}}'),repos='http://cran.us.r-project.org')" | R --slave --no-save --no-restore-history
+  with_items: r_packages
+  tags: 
+    - rro
