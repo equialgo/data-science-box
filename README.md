@@ -19,8 +19,6 @@ Installation requires:
 
 Run:
 * *./ipynb_server.sh* for the **IPython notebook server**
-* *./ijunb_server.sh* for the **IJulia notebook server**
-* *./irnb_server.sh* for the **IR notebook server**
 * *./ipysh.sh* for the **IPython shell**
 * *./wiki.sh* for the **Wiki**
 
