@@ -1,0 +1,22 @@
+---
+- name: Install python apt packages 
+  apt: pkg={{item}} state=latest
+  with_items: apt_packages
+  tags: 
+    - python-packages
+
+- name: Easy_install pip
+  easy_install: name=pip
+  tags: 
+    - python
+
+- name: Install llvmpy for numba
+  shell: sudo sh -c "LLVM_CONFIG_PATH=/usr/bin/llvm-config-3.3 pip install llvmpy"
+  tags: 
+    - python-packages
+
+- name: Install Python packages
+  pip: name={{item}} state=latest
+  with_items: pip_packages
+  tags:
+    - python-packages

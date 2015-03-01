@@ -1,0 +1,18 @@
+---
+- name: Install Vowpal Wabbit dependencies
+  apt: pkg={{item}} state=latest
+  with_items:
+    - libboost-program-options-dev #Vowpal Wabbit
+    - libboost-python-dev #Vowpal Wabbit
+  tags:
+    - vowpal
+
+- name: Getting Vowpal Wabbit repo
+  git: repo=https://github.com/JohnLangford/vowpal_wabbit.git dest=/tmp/vowpal_wabbit/
+  tags:
+    - vowpal
+
+- name: Install Vowpal Wabbit
+  shell: chdir=/tmp/vowpal_wabbit/ make; make install; ldconfig
+  tags:
+    - vowpal

@@ -1,0 +1,45 @@
+---
+- name: Install nbviewer depndencies
+  apt: pkg={{item}} state=latest
+  with_items:
+    - libmemcached-dev #nbviewer
+    - libcurl4-openssl-dev #nbviewer
+    - pandoc #nbviewer
+    - libevent-dev #nbviewer
+  tags:
+    - nbviewer
+
+- name: Getting nbviewer repo
+  git: repo=https://github.com/ipython/nbviewer.git dest=/home/vagrant/.nbviewer/
+  tags:
+  - nbviewer
+
+- name: Installing nbviewer dev-dependencies
+  shell: chdir=/home/vagrant/.nbviewer pip install -r dev-requirements.txt 
+  tags:
+  - nbviewer
+
+- name: Install bower
+  npm: name=bower global=yes
+  tags:
+  - nbviewer
+
+- name: Install less
+  npm: name=less global=yes
+  tags:
+  - nbviewer
+
+- name: Installing nbviewer dependencies
+  shell: chdir=/home/vagrant/.nbviewer pip install -r requirements.txt
+  tags:
+  - nbviewer
+
+- name: Invoke bower
+  shell:  chdir=/home/vagrant/.nbviewer invoke bower
+  tags:
+  - nbviewer
+
+- name: Invoke less
+  shell:  chdir=/home/vagrant/.nbviewer invoke less
+  tags:
+  - nbviewer

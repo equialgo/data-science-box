@@ -1,0 +1,15 @@
+---
+- name: Add Julia repo key
+  shell: sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 3D3D3ACC
+  tags:
+    - julia
+
+- name: Add Julia repo
+  apt_repository: repo='deb http://ppa.launchpad.net/staticfloat/juliareleases/ubuntu trusty main' state=present
+  tags:
+    - julia
+
+- name: Install Julia
+  apt: pkg=julia state=latest update_cache=yes
+  tags:
+    - julia

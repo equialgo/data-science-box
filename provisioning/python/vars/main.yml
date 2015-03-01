@@ -1,0 +1,74 @@
+---
+apt_packages:
+  - python-dev
+  - python-software-properties 
+  - python-setuptools
+  - python-psycopg2 #postgres 
+  - python-pycurl
+  - pkg-config
+  - libfreetype6-dev #matplotlib
+  - libxml2-dev #lxml
+  - libxslt1-dev #lxml
+  - zlib1g-dev #lxml
+  - libffi-dev #scrapy
+  - libssl-dev #scrapy
+  - llvm-3.3 #numba 
+  - llvm-3.3-runtime #numba 
+  - libopenblas-dev 
+  - liblapack-dev
+  - gfortran
+
+
+pip_packages:
+  - awscli
+  - csvkit
+  - bigmler
+  - cssselect
+  - lxml
+  - joblib
+  - six
+  - PrettyTable
+  - beautifulsoup4
+  - configparser
+  - futures
+  - logutils
+  - numpy
+  - scipy
+  - scikit-learn
+  - matplotlib
+  - ipython[notebook]
+  - pandas
+  - sympy
+  - nose
+  - patsy
+  - statsmodels
+  - ggplot
+  - seaborn
+  - paramiko
+  - bokeh
+  - numba
+  - cython
+  - numexpr
+  - blaze
+  - naturalsort
+  - graphlab-create
+  - pillow
+  - imagehash
+  - python-levenshtein
+  - git+https://github.com/quantopian/qgrid#egg=qgrid
+  - gloo
+  - networkx
+  - scrapy
+  - service_identity
+  - db.py
+  - singledispatch
+  - gensim
+  - nltk
+  - ghp-import
+  - envoy
+  - iso8601
+  - virtualenvwrapper
+
+ipynb_server:
+  ip: "'*'"
+  port: 8888

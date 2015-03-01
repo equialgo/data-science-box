@@ -1,0 +1,21 @@
+---
+- name: Install IRKernel dependencies
+  apt: pkg={{item}} state=latest
+  with_items:
+    - libzmq3-dev 
+    - libcurl4-openssl-dev
+  tags: 
+    - ir-kernel
+
+- name: Install R packages
+  shell: echo "install.packages(c('{{item}}'),repos='http://cran.us.r-project.org')" | R --slave --no-save --no-restore-history
+  with_items: 
+    - RCurl
+    - devtools
+  tags: 
+    - ir-kernel
+
+- name: R dependencies
+  shell: echo "library(devtools); options(unzip = 'internal'); install_github('armstrtw/rzmq'); install_github('takluyver/IRdisplay'); install_github('takluyver/IRkernel'); IRkernel::installspec();" | R --slave --no-save --no-restore-history
+  tags: 
+    - ir-kernel

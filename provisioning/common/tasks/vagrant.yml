@@ -1,0 +1,6 @@
+---
+- name: Set owner
+  file: path=/home/vagrant state=directory owner=vagrant group=vagrant recurse=yes
+
+- name: Set passwd for vagrant to vagrant
+  shell: echo "vagrant:vagrant" | chpasswd

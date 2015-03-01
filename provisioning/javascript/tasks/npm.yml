@@ -1,0 +1,5 @@
+---
+- name: Get npm
+  get_url: url=http://npmjs.org/install.sh dest=/tmp/install.sh
+- name: Install npm
+  shell: sudo clean=yes sh /tmp/install.sh
