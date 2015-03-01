@@ -48,6 +48,7 @@
       apt: pkg={{item}} state=latest
       with_items:
         - git
+        - software-properties-common # allowing add repository for apt
         - python-pycurl
         - python-dev
         - libxml2-dev #lxml
@@ -100,6 +101,7 @@
         - libboost-program-options-dev #Vowpal Wabbit
         - libboost-python-dev #Vowpal Wabbit
         - libopenblas-dev #Theano
+        - tre-agrep #Fuzzy grepping
 
     # Installing npm
 

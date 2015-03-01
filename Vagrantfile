@@ -12,6 +12,9 @@ Vagrant.configure("2") do |config|
   config.vm.network "forwarded_port", guest: 8787, host: 8787 #RStudio server
   config.vm.synced_folder "~/Projects", "/home/vagrant/Projects"
 
+  # Share SSH locally by default
+  config.vm.network "forwarded_port", guest: 22, host: 2200, id: "ssh", auto_correct: true
+
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "-vv"
     ansible.playbook = "provisioning/dsb.yml"
