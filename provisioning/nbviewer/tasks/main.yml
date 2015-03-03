@@ -19,16 +19,6 @@
   tags:
   - nbviewer
 
-- name: Install bower
-  npm: name=bower global=yes
-  tags:
-  - nbviewer
-
-- name: Install less
-  npm: name=less global=yes
-  tags:
-  - nbviewer
-
 - name: Installing nbviewer dependencies
   shell: chdir=/home/vagrant/.nbviewer pip install -r requirements.txt
   tags:

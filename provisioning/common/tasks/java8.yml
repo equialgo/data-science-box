@@ -1,0 +1,10 @@
+---
+- name: Add java8 apt-repository
+  apt_repository: repo='ppa:webupd8team/java'
+  tags:
+    - java8
+
+- name: Install java8
+  apt: pkg=oracle-java8-installer state=latest update_cache=yes
+  tags:
+    - java8

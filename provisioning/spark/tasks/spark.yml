@@ -1,0 +1,10 @@
+---
+- name: Download Spark
+  command: curl -LO http://d3kbcqa49mib13.cloudfront.net/spark-1.2.1-bin-hadoop2.4.tgz chdir=/tmp creates=/tmp/spark-1.2.1-bin-hadoop2.4.tgz
+  tags:
+    - spark
+
+- name: Extract Spark
+  command: /bin/tar -xzf /tmp/spark-1.2.1-bin-hadoop2.4.tgz chdir=/usr/local creates=/usr/local/spark-1.2.1-bin-hadoop2.4/RELEASE
+  tags:
+    - spark

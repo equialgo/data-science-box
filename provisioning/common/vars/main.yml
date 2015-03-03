@@ -41,5 +41,6 @@ utils_packages:
   - bc
   - software-properties-common
   - tre-agrep #Fuzzy grepping
+  - postgresql-client
 
 ntp_timezone: Europe/Amsterdam

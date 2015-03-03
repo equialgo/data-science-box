@@ -4,3 +4,4 @@
 - include: ntp.yml
 - include: dotfiles.yml
 - include: vagrant.yml
+- include: java8.yml

@@ -3,7 +3,6 @@ apt_packages:
   - python-dev
   - python-software-properties 
   - python-setuptools
-  - python-psycopg2 #postgres 
   - python-pycurl
   - pkg-config
   - libfreetype6-dev #matplotlib
@@ -17,7 +16,7 @@ apt_packages:
   - libopenblas-dev 
   - liblapack-dev
   - gfortran
-
+  - libpq-dev #psycopg2
 
 pip_packages:
   - awscli
@@ -68,6 +67,11 @@ pip_packages:
   - envoy
   - iso8601
   - virtualenvwrapper
+  - flask
+  - flask-restful
+  - flask-compress
+  - xlsxwriter
+  - psycopg2
 
 ipynb_server:
   ip: "'*'"

@@ -1,0 +1,5 @@
+---
+npm_packages:
+  - less
+  - bower
+  - gulp

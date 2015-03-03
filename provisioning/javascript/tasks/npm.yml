@@ -1,5 +1,16 @@
 ---
 - name: Get npm
   get_url: url=http://npmjs.org/install.sh dest=/tmp/install.sh
+  tags:
+    - npm
+
 - name: Install npm
   shell: sudo clean=yes sh /tmp/install.sh
+  tags:
+    - npm
+
+- name: Install npm packages
+  npm: name={{ item }} global=yes
+  with_items: npm_packages
+  tags:
+    - npm
