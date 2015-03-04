@@ -1,0 +1,16 @@
+---
+- name: Get Jove Spark
+  get_url: url=https://oss.sonatype.org/content/repositories/snapshots/sh/jove/jove-spark-cli_1.2_2.11/0.1.1-1-SNAPSHOT/jove-spark-cli_1.2_2.11-0.1.1-1-SNAPSHOT.tar.gz dest=/tmp/jove-spark.tar.gz
+  tags:
+    -jove-spark
+
+- name: Unpack tar
+  command: /bin/tar -xzf jove-spark.tar.gz chdir=/usr/local creates=/usr/local/jove-spark-cli_1.2-0.1.1-1-SNAPSHOT
+  tags:
+    -jove-spark
+
+- name: Install Jove Spark kernel
+  shell: chdir=/usr/local/jove-spark-cli_1.2-0.1.1-1-SNAPSHOT/bin ./jove-spark-1.2 --kernel-spec
+  sudo: no
+  tags:
+    -jove-spark

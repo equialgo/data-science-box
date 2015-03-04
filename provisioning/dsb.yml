@@ -10,3 +10,4 @@
     - { role: nbviewer, sudo: yes }
     - { role: vowpal, sudo: yes }
     - { role: weka, sudo: yes }
+    - { role: spark, sudo: yes }
