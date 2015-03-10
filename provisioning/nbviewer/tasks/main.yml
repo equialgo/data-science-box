@@ -24,14 +24,17 @@
   tags:
   - nbviewer
 
+- name: Npm install
+  shell:  chdir=/home/vagrant/.nbviewer npm install
+  tags:
+  - nbviewer
+
 - name: Invoke bower
-  shell:  chdir=/home/vagrant/.nbviewer bower
-  sudo: no
+  shell:  chdir=/home/vagrant/.nbviewer invoke bower
   tags:
   - nbviewer
 
 - name: Invoke less
-  shell:  chdir=/home/vagrant/.nbviewer less
-  sudo: no
+  shell:  chdir=/home/vagrant/.nbviewer invoke less
   tags:
   - nbviewer
