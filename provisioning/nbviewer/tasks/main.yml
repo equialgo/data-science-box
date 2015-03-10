@@ -25,11 +25,13 @@
   - nbviewer
 
 - name: Invoke bower
-  shell:  chdir=/home/vagrant/.nbviewer invoke bower
+  shell:  chdir=/home/vagrant/.nbviewer bower
+  sudo: no
   tags:
   - nbviewer
 
 - name: Invoke less
-  shell:  chdir=/home/vagrant/.nbviewer invoke less
+  shell:  chdir=/home/vagrant/.nbviewer less
+  sudo: no
   tags:
   - nbviewer
