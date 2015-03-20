@@ -1,6 +1,6 @@
 ---
 - name: Download Spark
-  command: curl -LO http://d3kbcqa49mib13.cloudfront.net/{{ spark_version }}.tgz chdir=/tmp creates=/tmp/{{ spark_version }}.tgz
+  command: curl -LOs http://d3kbcqa49mib13.cloudfront.net/{{ spark_version }}.tgz chdir=/tmp creates=/tmp/{{ spark_version }}.tgz
   tags:
     - spark
 
