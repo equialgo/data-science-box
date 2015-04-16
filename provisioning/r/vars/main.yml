@@ -6,5 +6,7 @@ r_packages:
   - dplyr
   - mass
   - car
+  - knitr
+  - rmarkdown
 
 rstudio_installer : rstudio-server-0.98.1102-amd64
