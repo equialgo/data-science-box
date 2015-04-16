@@ -16,7 +16,7 @@
     - ir-kernel
 
 - name: Install IRKernel dependencies
-  shell: echo "library(devtools); options(unzip = 'internal'); install_github('armstrtw/rzmq'); install_github('takluyver/IRdisplay'); install_github('takluyver/IRkernel')" | R --slave --no-save --no-restore-history
+  shell: echo "library(devtools); options(unzip = 'internal'); install_github('armstrtw/rzmq'); install_github('IRkernel/repr'); install_github('IRkernel/IRdisplay'); install_github('IRkernel/IRkernel')" | R --slave --no-save --no-restore-history
   tags: 
     - ir-kernel
 
