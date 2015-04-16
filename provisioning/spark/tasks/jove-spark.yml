@@ -5,7 +5,7 @@
     -jove-spark
 
 - name: Make Jove spark dir
-  shell: rm -rf /usr/local/jove-spark; mkdir /usr/local/jove-spark
+  shell: rm -rf /usr/local/jove-spark
   tags:
     -jove-spark
 
