@@ -9,4 +9,4 @@ r_packages:
   - knitr
   - rmarkdown
 
-rstudio_installer : rstudio-server-0.98.1102-amd64
+rstudio_installer : rstudio-server-0.98.1103-amd64
