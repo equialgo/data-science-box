@@ -1,0 +1,5 @@
+---
+- name: Clone csvquote
+  git: repo=https://github.com/dbro/csvquote.git dest=/tmp/csvquote/
+- name: Install csvquote
+  shell: chdir=/tmp/csvquote make; make install
