@@ -8,5 +8,8 @@ r_packages:
   - car
   - knitr
   - rmarkdown
+  - Rccp
+  - dplyr
+  - tidyr
 
 rstudio_installer : rstudio-server-0.98.1103-amd64
