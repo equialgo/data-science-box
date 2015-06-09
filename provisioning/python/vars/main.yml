@@ -11,8 +11,7 @@ apt_packages:
   - zlib1g-dev #lxml
   - libffi-dev #scrapy
   - libssl-dev #scrapy
-  - llvm-3.3 #numba 
-  - llvm-3.3-runtime #numba 
+  - llvm-3.5-dev #numba
   - libopenblas-dev 
   - liblapack-dev
   - gfortran
@@ -45,7 +44,6 @@ pip_packages:
   - seaborn
   - paramiko
   - bokeh
-  - numba
   - cython
   - numexpr
   - blaze

@@ -10,13 +10,23 @@
   tags: 
     - python
 
-- name: Install llvmpy for numba
-  shell: sudo sh -c "LLVM_CONFIG_PATH=/usr/bin/llvm-config-3.3 pip install llvmpy"
-  tags: 
-    - python-packages
-
 - name: Install Python packages
   pip: name={{item}} state=latest
   with_items: pip_packages
+  tags:
+    - python-packages
+
+- name: Install llvlite for numba
+  shell: sudo sh -c "LLVM_CONFIG=/usr/bin/llvm-config-3.5 pip install llvmlite"
+  tags: 
+    - python-packages
+
+- name: Getting Numba repo
+  git: repo=https://github.com/numba/numba.git dest=/tmp/numba/
+  tags:
+    - python-packages
+
+- name: Install Numba
+  shell: chdir=/tmp/numba/ pip install -r requirements.txt; python setup.py build_ext --inplace; python setup.py install
   tags:
     - python-packages
