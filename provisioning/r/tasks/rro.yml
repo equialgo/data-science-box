@@ -5,7 +5,7 @@
     - rro
 
 - name: Install Revolution R Open (RRO)
-  shell: chdir=/tmp/ tar -xzvf RRO.tar.gz; ./install.sh;
+  shell: chdir=/tmp/ tar -xzvf RRO.tar.gz; cd RRO*; ./install.sh;
   tags: 
     - rro
 

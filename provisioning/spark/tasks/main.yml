@@ -1,3 +1,2 @@
 ---
 - include: spark.yml
-- include: jove-spark.yml
