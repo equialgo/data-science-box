@@ -71,6 +71,7 @@ pip_packages:
   - xlsxwriter
   - psycopg2
   - toolz
+  - MySQL-python
 
 ipynb_server:
   ip: "'*'"
