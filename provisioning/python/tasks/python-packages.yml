@@ -30,3 +30,8 @@
   shell: chdir=/tmp/numba/ pip install -r requirements.txt; python setup.py build_ext --inplace; python setup.py install
   tags:
     - python-packages
+
+ - name: Install mysql-connector-python
+   pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
+   tags:
+    - python-packages

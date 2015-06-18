@@ -16,6 +16,7 @@ apt_packages:
   - liblapack-dev
   - gfortran
   - libpq-dev #psycopg2
+  - libmysqlclient-dev #mysql
 
 pip_packages:
   - awscli
