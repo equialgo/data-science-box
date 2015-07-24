@@ -20,7 +20,6 @@ Installation requires:
 Run:
 * *./ipynb_server.sh* for the **IPython notebook server**
 * *./ipysh.sh* for the **IPython shell**
-* *./wiki.sh* for the **Wiki**
 
 The RStudio server can be reached via http://localhost:8787/ using the login: *vargrant* and passwrd: *vagrant*.
 
