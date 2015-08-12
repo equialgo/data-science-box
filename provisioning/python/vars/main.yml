@@ -11,7 +11,8 @@ apt_packages:
   - zlib1g-dev #lxml
   - libffi-dev #scrapy
   - libssl-dev #scrapy
-  - llvm-3.5-dev #numba
+  - llvm-3.6-dev #numba
+  - libedit-dev #numba
   - libopenblas-dev 
   - liblapack-dev
   - gfortran

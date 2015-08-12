@@ -17,7 +17,7 @@
     - python-packages
 
 - name: Install llvlite for numba
-  shell: sudo sh -c "LLVM_CONFIG=/usr/bin/llvm-config-3.5 pip install llvmlite"
+  shell: sudo sh -c "LLVM_CONFIG=/usr/bin/llvm-config-3.6 pip install llvmlite"
   tags: 
     - python-packages
 
@@ -31,7 +31,7 @@
   tags:
     - python-packages
 
- - name: Install mysql-connector-python
-   pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
-   tags:
+- name: Install mysql-connector-python
+  pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
+  tags:
     - python-packages
