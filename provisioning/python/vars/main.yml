@@ -74,6 +74,7 @@ pip_packages:
   - psycopg2
   - toolz
   - MySQL-python
+  - ipdb
 
 ipynb_server:
   ip: "'*'"
