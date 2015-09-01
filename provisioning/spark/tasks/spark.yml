@@ -1,6 +1,6 @@
 ---
 - name: Download Spark
-  command: curl -LOs http://d3kbcqa49mib13.cloudfront.net/{{ spark_version }}.tgz chdir=/tmp creates=/tmp/{{ spark_version }}.tgz
+  shell: wget -qO /tmp/{{ spark_version }}.tgz http://d3kbcqa49mib13.cloudfront.net/{{ spark_version }}.tgz
   tags:
     - spark
 
@@ -11,6 +11,7 @@
 
 - name: Make pyspark kernel directory
   file: path=/home/vagrant/.ipython/kernels/pyspark state=directory owner=vagrant group=vagrant mode=0644
+  tags:
     - spark
 
 - name: Copy pyspark kernel.json
