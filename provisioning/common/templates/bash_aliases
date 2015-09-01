@@ -10,7 +10,7 @@ alias j='jump'
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 # start ipython notebook server
-alias start_ipynb_server="screen -S ipython_notebook -dm bash -c 'ipython notebook --profile dsb'"
+alias start_ipynb_server="screen -S ipython_notebook -dm bash -c 'ipython notebook --ip=* --no-browser --port=8888'"
 
 # stop ipython notebook server
 alias stop_ipynb_server="screen -ls ipython_notebook | grep Detached | cut -d. -f1 | awk '{print $1}' | xargs kill"

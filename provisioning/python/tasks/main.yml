@@ -1,3 +1,2 @@
 ---
 - include: python-packages.yml
-- include: ipython-profiles.yml

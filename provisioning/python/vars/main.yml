@@ -36,7 +36,9 @@ pip_packages:
   - scipy
   - scikit-learn
   - matplotlib
-  - ipython[notebook]
+  - ipython
+  - jupyter
+  - ipywidgets
   - pandas
   - sympy
   - nose
