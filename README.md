@@ -19,4 +19,4 @@ Installation requires:
 
 Start the Jupyter notebook server:
 * run `vagrant ssh` to log-in;
-* then type `start_ipynb_server`.
+* then type `start_ipynb_server` to start the notebook server
