@@ -8,3 +8,23 @@
   command: /bin/tar -xzf /tmp/{{ spark_version }}.tgz chdir=/usr/local creates=/usr/local/{{ spark_version }}/RELEASE
   tags:
     - spark
+
+- name: Make pyspark kernel directory
+  file: path=/home/vagrant/.ipython/kernels/pyspark state=directory owner=vagrant group=vagrant mode=0644
+    - spark
+
+- name: Copy pyspark kernel.json
+  template: src=kernel.json.j2 dest=/home/vagrant/.ipython/kernels/pyspark/kernel.json owner=vagrant group=vagrant mode=0644 backup=true
+  tags:
+    - spark
+
+# - name: creating pyspark profile
+#   shell: /usr/local/bin/ipython profile create pyspark
+#   sudo: no 
+#   tags:
+#     - spark
+
+# - name: creating pyspark startup script
+#   template: src=00-pyspark-setup.py.j2 dest=/home/vagrant/.ipython/profile_pyspark/startup/00-pyspark-setup.py owner=vagrant group=vagrant mode=0644 backup=true
+#   tags:
+#     - spark
