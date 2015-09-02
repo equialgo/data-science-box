@@ -12,15 +12,11 @@ Installation requires:
 
 # Installation
 1. checkout the git repo
-2. run *vagrant up*
+2. run `vagrant up`
 3. and you are done! 
 
 # Usage
 
-Run:
-* *./ipynb_server.sh* for the **IPython notebook server**
-* *./ipysh.sh* for the **IPython shell**
-
-The RStudio server can be reached via http://localhost:8787/ using the login: *vargrant* and passwrd: *vagrant*.
-
-Note that the ds box is configured such that it automatically mounts the *~/Projects* folder. 
+Start the Jupyter notebook server:
+* run `vagrant ssh` to log-in;
+* then type `start_ipynb_server` to start the notebook server
