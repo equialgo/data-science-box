@@ -40,6 +40,7 @@ pip_packages:
   - jupyter
   - ipywidgets
   - pandas
+  - sklearn-pandas
   - sympy
   - nose
   - patsy
