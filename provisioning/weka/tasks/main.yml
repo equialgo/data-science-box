@@ -5,7 +5,7 @@
     -weka
 
 - name: Get Weka
-  shell: wget -Oq /tmp/weka.zip http://downloads.sourceforge.net/project/weka/weka-3-7/3.7.12/weka-3-7-12.zip
+  shell: wget -qO /tmp/weka.zip http://downloads.sourceforge.net/project/weka/weka-3-7/3.7.12/weka-3-7-12.zip
   tags:
     -weka
 
