@@ -35,3 +35,13 @@
   pip: name=mysql-connector-python state=latest extra_args='--allow-external mysql-connector-python'
   tags:
     - python-packages
+
+- name: Getting RISE repo
+  git: repo=https://github.com/damianavila/RISE.git dest=/tmp/rise/
+  tags:
+    - python-packages
+
+- name: Install RISE
+  shell: chdir=/tmp/rise/ python setup.py install
+  tags:
+    - python-packages  
